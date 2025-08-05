@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  backend:
+    build: .
+    container_name: beautybook-backend
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8
+    container_name: beautybook-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 434200161
+      MYSQL_DATABASE: beautybook
+      MYSQL_USER: manar
+      MYSQL_PASSWORD: 434200161
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysqldata:/var/lib/mysql
+volumes:
+  mysqldata:
